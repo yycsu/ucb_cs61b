@@ -323,6 +323,10 @@ public class IntList {
      * @return return value.
      */
     public static IntList reverse(IntList A) {
+        if (A == null || A.rest == null){
+           return A; 
+        }
+
         int index1 = 0;
         int index2 = A.size() - 1;
         int temp = 0;
