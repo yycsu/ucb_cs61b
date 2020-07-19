@@ -1,11 +1,11 @@
-public class LinkedListDeque{
+public class LinkedListDeque<T>{
 
 	private class IntNode{
-		public int item;
+		public T item;
 		public IntNode next;
 		public IntNode prev;
 
-		public IntNode(int i, IntNode n, IntNode p){
+		public IntNode(T i, IntNode n, IntNode p){
 			item = i;
 			next = n;
 			prev = p;
@@ -16,19 +16,19 @@ public class LinkedListDeque{
 	private int size;
 
 	public LinkedListDeque(){
-		sentinel = new IntNode(63, null, null);
+		sentinel = new IntNode(null, null, null);
 		size = 0;
 	}
 
 	public LinkedListDeque(LinkedListDeque other){
-		sentinel = new IntNode(63, null, null);
+		sentinel = new IntNode(null, null, null);
 		size = 0;
 		for (int i = 0; i < other.size(); i++){
-			this.addLast(other.get(i));
+			addLast((T)other.get(i));
 		}
 	}
 
-	public void addFirst(int x){
+	public void addFirst(T x){
 		if (sentinel.next == null){
 			IntNode add = new IntNode(x, sentinel, sentinel);
 			sentinel.next = add;
@@ -41,7 +41,7 @@ public class LinkedListDeque{
 		size += 1;
 	}
 
-	public void addLast(int x){
+	public void addLast(T x){
 		if (sentinel.next == null){
 			IntNode add = new IntNode(x, sentinel, sentinel);
 			sentinel.next = add;
@@ -58,7 +58,7 @@ public class LinkedListDeque{
 		return size;
 	}
 
-	public java.lang.Integer get(int index){
+	public T get(int index){
 		if (size == 0 || index > size -1)
 			return null;
 
@@ -71,7 +71,7 @@ public class LinkedListDeque{
 		return p.item;
 	}
 
-	private java.lang.Integer getRecursive(IntNode p, int index)
+	private T getRecursive(IntNode p, int index)
 	{	
 		if (index == 0){
 			return p.item;
@@ -79,7 +79,7 @@ public class LinkedListDeque{
 		return getRecursive(p.next, index - 1);
 	}
 
-	public java.lang.Integer getRecursive(int index){
+	public T getRecursive(int index){
 		if (size == 0 || index > size -1)
 			return null;
 
@@ -87,7 +87,7 @@ public class LinkedListDeque{
 		return getRecursive(p, index);
 	}
 
-	public java.lang.Integer removeFirst(){
+	public T removeFirst(){
 		if (sentinel.next == null)
 			return null;
 
@@ -104,11 +104,11 @@ public class LinkedListDeque{
 		return temp;
 	}
 
-	public java.lang.Integer removeLast(){
+	public T removeLast(){
 		if (sentinel.next == null)
 			return null;
 
-		int temp = sentinel.next.item;
+		T temp = sentinel.next.item;
 		if (sentinel.next.next == null){
 			sentinel = new IntNode(63, null, null);
 			size = 0;
@@ -122,7 +122,7 @@ public class LinkedListDeque{
 	}
 
 	public boolean isEmpty(){
-		return (sentinel.next == null);
+		return (size == 0);
 	}
 
 	public void printDeque(){
