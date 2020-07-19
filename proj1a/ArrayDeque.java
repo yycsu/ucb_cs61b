@@ -61,6 +61,11 @@ public class ArrayDeque<T>{
 		if (size == 0)
 			return null;
 		T temp = items[0];
+		if (size == 1) {
+			items = null;
+			return temp;
+		}
+
 		T[] a = (T[]) new Object[items.length];
 		System.arraycopy(items, 1, a, 0, size-1);
 		items = a;
@@ -75,6 +80,10 @@ public class ArrayDeque<T>{
 		if (size == 0)
 			return null;
 		T temp = items[size - 1];
+		if (size == 1) {
+			items = null;
+			return temp;
+		}
 		items[size - 1] = null;
 		size -= 1;
 		if (size == items.length / 4){
@@ -89,5 +98,11 @@ public class ArrayDeque<T>{
 			return null;
 		}
 		return items[index];
+	}
+
+	public static void main(String[] args){
+		LinkedListDeque L = new LinkedListDeque();
+		L.addFirst(0);
+		System.out.println(L.removeFirst());
 	}
 }
