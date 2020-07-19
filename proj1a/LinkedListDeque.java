@@ -108,7 +108,7 @@ public class LinkedListDeque<T>{
 		if (sentinel.next == null)
 			return null;
 
-		T temp = sentinel.next.item;
+		T temp = sentinel.prev.item;
 		if (sentinel.next.next == null){
 			sentinel = new IntNode(null, null, null);
 			size = 0;
@@ -139,19 +139,15 @@ public class LinkedListDeque<T>{
 
 	public static void main(String[] args){
 		LinkedListDeque L = new LinkedListDeque();
-		L.addFirst(10);
-		L.addFirst(20);
-		L.addLast(30);
-		L.addLast(50);
-
-		System.out.println(L.removeFirst());
+		L.addFirst(0);
+		L.addFirst(1);
+		L.addFirst(2);
+		L.addFirst(3);
+		L.addFirst(4);
+		L.addFirst(5);
+		L.addFirst(6);
+		L.addFirst(7);
 		System.out.println(L.removeLast());
-		System.out.println(L.isEmpty());
-
-		L.printDeque();
-
-		System.out.println("\n");
-		System.out.println(L.getRecursive(2));
 	}
 
 }
