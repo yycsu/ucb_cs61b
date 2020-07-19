@@ -16,12 +16,12 @@ public class LinkedListDeque<T>{
 	private int size;
 
 	public LinkedListDeque(){
-		sentinel = new IntNode(null, null, null);
+		sentinel = new IntNode(null, sentinel, sentinel);
 		size = 0;
 	}
 
 	public LinkedListDeque(LinkedListDeque other){
-		sentinel = new IntNode(null, null, null);
+		sentinel = new IntNode(null, sentinel, sentinel);
 		size = 0;
 		for (int i = 0; i < other.size(); i++){
 			addLast((T)other.get(i));
@@ -91,9 +91,9 @@ public class LinkedListDeque<T>{
 		if (sentinel.next == null)
 			return null;
 
-		int temp = sentinel.next.item;
+		T temp = sentinel.next.item;
 		if (sentinel.next.next == null){
-			sentinel = new IntNode(63, null, null);
+			sentinel = new IntNode(null, null, null);
 			size = 0;
 			return temp;
 		}
@@ -110,7 +110,7 @@ public class LinkedListDeque<T>{
 
 		T temp = sentinel.next.item;
 		if (sentinel.next.next == null){
-			sentinel = new IntNode(63, null, null);
+			sentinel = new IntNode(null, null, null);
 			size = 0;
 			return temp;
 		}
