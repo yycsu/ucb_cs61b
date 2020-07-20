@@ -24,19 +24,18 @@ public class ArrayDeque<T>{
 	}
 
 	public void addFirst(T x){
-		if (size == items.length){
-			resize(1, size *4);
+		int len = items.length;
+		if (size >= items.length){
+			len = 4 * len;
 		}
-		T[] a = (T[]) new Object[items.length];
-		System.arraycopy(items, 0, a, 1, size);
-		items = a;
+		resize(1, len);
 		items[0] = x;
 		size += 1;
 	}
 
 	public void addLast(T x){
-		if (size == items.length){
-			resize(0, size * 2);
+		if (size >= items.length){
+			resize(0, items.length * 4);
 		}
 		items[size] = x;
 		size += 1;
@@ -104,8 +103,24 @@ public class ArrayDeque<T>{
 
 	public static void main(String[] args){
 		ArrayDeque L = new ArrayDeque();
-		System.out.println(L.removeFirst());
+		L.addFirst(0);
+		L.addFirst(1);
+		L.get(0);
+		L.addLast(3);
+		L.addLast(4);
+		L.removeFirst();
+		L.get(0);
+		L.removeLast();
+		L.get(0);
+		L.removeLast();
+		L.addLast(10);
+		L.removeLast();
+		L.addFirst(12);
+		L.removeLast();
+		L.addFirst(14);
+		L.addFirst(15);
+		L.addLast(16);
+		L.removeLast();
 		System.out.println(L.removeLast());
-		L.isEmpty();
 	}
 }
