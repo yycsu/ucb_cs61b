@@ -62,7 +62,8 @@ public class ArrayDeque<T>{
 			return null;
 		T temp = items[0];
 		if (size == 1) {
-			items = null;
+			items[0] = null;
+			size = 0;
 			return temp;
 		}
 
@@ -71,7 +72,7 @@ public class ArrayDeque<T>{
 		items = a;
 		size -= 1;
 		if (size < items.length / 4){
-			resize(0, size / 4);
+			resize(0, items.length / 4);
 		} 
 		return temp;
 	}
@@ -81,13 +82,14 @@ public class ArrayDeque<T>{
 			return null;
 		T temp = items[size - 1];
 		if (size == 1) {
-			items = null;
+			items[0] = null;
+			size = 0;
 			return temp;
 		}
 		items[size - 1] = null;
 		size -= 1;
-		if (size == items.length / 4){
-			resize(0, size / 4);
+		if (size < items.length / 4){
+			resize(0, items.length / 4);
 		}
 		return temp;
 	}
@@ -101,8 +103,9 @@ public class ArrayDeque<T>{
 	}
 
 	public static void main(String[] args){
-		LinkedListDeque L = new LinkedListDeque();
-		L.addFirst(0);
+		ArrayDeque L = new ArrayDeque();
 		System.out.println(L.removeFirst());
+		System.out.println(L.removeLast());
+		L.isEmpty();
 	}
 }
