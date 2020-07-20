@@ -140,18 +140,4 @@ public class LinkedListDeque<T>{
 		System.out.println("\n");
 	}
 
-	public static void main(String[] args){
-		LinkedListDeque L = new LinkedListDeque(null);
-		L.addFirst(10);
-		L.addFirst(20);
-		L.addFirst(30);
-		L.addFirst(40);
-		L.removeLast();
-		L.removeLast();
-		L.removeLast();
-		L.removeLast();
-		L.removeLast();
-		L.removeFirst();
-		System.out.println(L.size());
-	}
 }

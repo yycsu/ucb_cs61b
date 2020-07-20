@@ -100,14 +100,4 @@ public class ArrayDeque<T>{
 		}
 		return items[index];
 	}
-
-	public static void main(String[] args){
-		ArrayDeque L = new ArrayDeque();
-		long starTime = System.currentTimeMillis();
-		for(int i = 0; i < 33668; i++){
-			L.addFirst(0);
-		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("程序运行时间： "+ (endTime - starTime) + "ms");
-	}
 }
