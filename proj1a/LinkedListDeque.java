@@ -93,7 +93,8 @@ public class LinkedListDeque<T>{
 
 		T temp = sentinel.next.item;
 		if (sentinel.next.next == sentinel || sentinel.next.next == null){
-			sentinel = new IntNode(null, sentinel, sentinel);
+			sentinel.next = sentinel;
+			sentinel.prev = sentinel;
 			size = 0;
 			return temp;
 		}
@@ -110,7 +111,8 @@ public class LinkedListDeque<T>{
 
 		T temp = sentinel.prev.item;
 		if (sentinel.next.next == sentinel || sentinel.next.next == null){
-			sentinel = new IntNode(null, sentinel, sentinel);
+			sentinel.next = sentinel;
+			sentinel.prev = sentinel;
 			size = 0;
 			return temp;
 		}
@@ -136,5 +138,4 @@ public class LinkedListDeque<T>{
 		}
 		System.out.println("\n");
 	}
-
 }
