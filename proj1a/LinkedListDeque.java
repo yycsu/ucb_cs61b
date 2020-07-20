@@ -88,11 +88,11 @@ public class LinkedListDeque<T>{
 	}
 
 	public T removeFirst(){
-		if (sentinel.next == sentinel)
+		if (sentinel.next == sentinel || sentinel.next == null)
 			return null;
 
 		T temp = sentinel.next.item;
-		if (sentinel.next.next == sentinel){
+		if (sentinel.next.next == sentinel || sentinel.next.next == null){
 			sentinel = new IntNode(null, sentinel, sentinel);
 			size = 0;
 			return temp;
@@ -105,11 +105,11 @@ public class LinkedListDeque<T>{
 	}
 
 	public T removeLast(){
-		if (sentinel.next == sentinel)
+		if (sentinel.next == sentinel || sentinel.next == null)
 			return null;
 
 		T temp = sentinel.prev.item;
-		if (sentinel.next.next == sentinel){
+		if (sentinel.next.next == sentinel || sentinel.next.next == null){
 			sentinel = new IntNode(null, sentinel, sentinel);
 			size = 0;
 			return temp;
