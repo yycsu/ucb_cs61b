@@ -93,7 +93,6 @@ public class ArrayDeque<T>{
 		return temp;
 	}
 
-
 	public T get(int index){
 		if (index >= size){
 			return null;
