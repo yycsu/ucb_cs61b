@@ -103,24 +103,11 @@ public class ArrayDeque<T>{
 
 	public static void main(String[] args){
 		ArrayDeque L = new ArrayDeque();
-		L.addFirst(0);
-		L.addFirst(1);
-		L.get(0);
-		L.addLast(3);
-		L.addLast(4);
-		L.removeFirst();
-		L.get(0);
-		L.removeLast();
-		L.get(0);
-		L.removeLast();
-		L.addLast(10);
-		L.removeLast();
-		L.addFirst(12);
-		L.removeLast();
-		L.addFirst(14);
-		L.addFirst(15);
-		L.addLast(16);
-		L.removeLast();
-		System.out.println(L.removeLast());
+		long starTime = System.currentTimeMillis();
+		for(int i = 0; i < 33668; i++){
+			L.addFirst(0);
+		}
+		long endTime = System.currentTimeMillis();
+		System.out.println("程序运行时间： "+ (endTime - starTime) + "ms");
 	}
 }
