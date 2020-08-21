@@ -15,10 +15,10 @@ public class TestOffByOne {
         boolean actual_4 = offByOne.equalChars('a', '9');
         boolean actual_5 = offByOne.equalChars('&', '%');
 
-        assertEquals(actual_1, true);
-        assertEquals(actual_2, false);
-        assertEquals(actual_3,false);
-        assertEquals(actual_4,false);
-        assertEquals(actual_5, true);
+        assertTrue(actual_1);
+        assertFalse(actual_2);
+        assertFalse(actual_3);
+        assertFalse(actual_4);
+        assertTrue(actual_5);
     }
 } //Uncomment this class once you've created your CharacterComparator interface and OffByOne class.

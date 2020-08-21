@@ -16,13 +16,13 @@ public class TestOffByN {
         boolean actual_7 = offBy5.equalChars('f', 'h');
 
 
-        assertEquals(actual_1, false);
-        assertEquals(actual_2, false);
-        assertEquals(actual_3, false);
-        assertEquals(actual_4, false);
-        assertEquals(actual_5, true);
-        assertEquals(actual_6, true);
-        assertEquals(actual_7, false);
+        assertFalse(actual_1);
+        assertFalse(actual_2);
+        assertFalse(actual_3);
+        assertFalse(actual_4);
+        assertTrue(actual_5);
+        assertTrue(actual_6);
+        assertFalse(actual_7);
 
 
     }

@@ -25,12 +25,12 @@ public class TestPalindrome {
         boolean n = palindrome.isPalindrome("horse");
         boolean w = palindrome.isPalindrome("a");
         boolean s = palindrome.isPalindrome("racecar");
-        assertEquals(p, false);
-        assertEquals(q, true);
-        assertEquals(m, true);
-        assertEquals(n, false);
-        assertEquals(w, true);
-        assertEquals(s, true);
+        assertFalse(p);
+        assertTrue(q);
+        assertTrue(m);
+        assertFalse(n);
+        assertTrue(w);
+        assertTrue(s);
     }
 
     @Test
@@ -39,9 +39,9 @@ public class TestPalindrome {
         boolean q = palindrome.isPalindrome("flake", offByOne);
         boolean n = palindrome.isPalindrome("horse", offByOne);
         boolean s = palindrome.isPalindrome("racecar", offByOne);
-        assertEquals(p, true);
-        assertEquals(q, true);
-        assertEquals(n, false);
-        assertEquals(s, false);
+        assertTrue(p);
+        assertTrue(q);
+        assertFalse(n);
+        assertFalse(s);
     }
 }     //Uncomment this class once you've created your Palindrome class.

@@ -1,8 +1,7 @@
 package huglife;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Map;
-import java.util.List;
 
 /**
  * Example of a creature you might create for your world.
@@ -25,7 +24,7 @@ public class SampleCreature extends Creature {
     /**
      * red color.
      */
-    private int r = 155;
+    private int r = 255;
     /**
      * green color.
      */
