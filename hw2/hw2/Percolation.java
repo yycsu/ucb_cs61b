@@ -45,19 +45,19 @@ public class Percolation {
         if (row == 0){
             UF.union(side*side, index);
         }
-        else if (row == side -1){
+        else if (row == side -1 && UF.connected(side * side, index)){
             UF.union(side*side + 1, index);
         }
         if(left_index>=0 && col > 0 && isOpen(row, col - 1)){
             UF.union(index, left_index);
         }
-        if(right_index <= side*side && col < side-1 && isOpen(row, col + 1)){
+        if(right_index <= side*side - 1 && col < side-1 && isOpen(row, col + 1)){
             UF.union(index, right_index);
         }
         if(up_index>=0 && row > 0 && isOpen(row - 1, col)){
             UF.union(index, up_index);
         }
-        if(down_index <= side*side && row < side-1 && isOpen(row + 1, col)){
+        if(down_index <= side*side - 1 && row < side-1 && isOpen(row + 1, col)){
             UF.union(index, down_index);
         }
     };
@@ -78,8 +78,21 @@ public class Percolation {
         }
 
         int index = xyTo1d(row, col);
+        int left_index = xyTo1d(row, col - 1);
+        int right_index = xyTo1d(row, col + 1);
+        int up_index = xyTo1d(row -1, col);
+        int down_index = xyTo1d(row + 1, col);
 
         if (UF.connected(index, side*side)){
+            if (percolates()){
+                if ((left_index >=0 && col > 0 && UF.connected(left_index, side * side))
+                    ||(right_index <= side*side -1) && col < side -1 && UF.connected(right_index, side * side)
+                    ||(up_index >=0 && row > 0 && UF.connected(up_index, side * side))
+                    ||(down_index <= side*side -1) && row < side -1 && UF.connected(down_index, side * side)){
+                    return true;
+                }
+                return false;
+            }
             return true;
         }
         return false;
