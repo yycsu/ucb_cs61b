@@ -92,6 +92,9 @@ public class Percolation {
 
     //does the system percolate?
     public boolean percolates(){
+        if (side == 1 && isOpen(0, 0)){
+            return true;
+        }
         if (UF.connected(side*side+1, side*side)){
             return true;
         }

@@ -9,8 +9,8 @@ public class PercolationStats {
     public double[] threshold_list;
     // perform T independent experiments on an N-by-N grid
     public PercolationStats(int N, int T, PercolationFactory pf){
-        if (N<= 0){
-            throw new IllegalArgumentException("N must be positive!");
+        if (N<= 0 || T <=0){
+            throw new IllegalArgumentException("N and T must be positive!");
         }
         threshold_list = new double[T];
         times = T;
