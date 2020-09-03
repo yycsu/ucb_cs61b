@@ -73,7 +73,7 @@ public class Percolation {
 
     //is the site(row, col) full?
     public boolean isFull(int row, int col){
-        if (row <0 || col <0 || row > side || col > side){
+        if (row <0 || col <0 || row > side - 1 || col > side - 1){
             throw new IndexOutOfBoundsException("Index out of Bounds");
         }
 
