@@ -2,14 +2,13 @@
 public class UnionFind {
 
     // TODO - Add instance variables?
-    private int parent[];
+    private int[] parent;
 
     /* Creates a UnionFind data structure holding n vertices. Initially, all
        vertices are in disjoint sets. */
     public UnionFind(int n) {
         // TODO
-        parent = new int[n];
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < parent.length; i++){
             parent[i] = -1;
         }
     }
@@ -18,7 +17,7 @@ public class UnionFind {
     private void validate(int vertex){
         // TODO
         if (vertex < 0 || vertex > parent.length){
-            throw new IllegalArgumentException("Invalid index");
+            throw new IllegalArgumentException("Invalid Index!");
         }
     }
 
@@ -59,10 +58,9 @@ public class UnionFind {
                 parent[find(v1)] -= sizeOf(v2);
                 parent[find(v2)] = find(v1);
             }
-            else{
-                parent[find(v2)] -= sizeOf(v1);
-                parent[find(v1)] = find(v2);
-            }
+        }else{
+            parent[find(v2)] -= sizeOf(v1);
+            parent[find(v1)] = find(v2);
         }
     }
 
@@ -70,15 +68,13 @@ public class UnionFind {
        allowing for fast search-time. */
     public int find(int vertex) {
         // TODO
-        validate(vertex);
         int r = vertex;
         while (parent[r] >= 0){
             r = parent[r];
         }
 
-        //change all points up vertex's parent become root
         int currParent;
-        while(vertex != r){
+        while (vertex != r){
             currParent = parent(vertex);
             parent[vertex] = r;
             vertex = currParent;
