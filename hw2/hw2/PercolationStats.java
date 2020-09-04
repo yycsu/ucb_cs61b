@@ -48,7 +48,7 @@ public class PercolationStats {
     public static void main(String[] args){
         PercolationFactory pf = new PercolationFactory();
         Stopwatch timer1 = new Stopwatch();
-        PercolationStats p = new PercolationStats(200, 1000, pf);
+        PercolationStats p = new PercolationStats(5, 10, pf);
         double time1 = timer1.elapsedTime();
         StdOut.printf("mean: %.3f\n low_value: %.3f\n high_value: %.3f\n (%.3f seconds)\n",p.mean(), p.confidenceLow(), p.confidenceHigh(), time1);
     }
