@@ -45,9 +45,6 @@ public class Percolation {
         if (row == 0){
             UF.union(side*side, index);
         }
-        else if (row == side -1){
-            UF.union(side*side + 1, index);
-        }
         if(left_index>=0 && col > 0 && isOpen(row, col - 1)){
             UF.union(index, left_index);
         }
@@ -78,6 +75,11 @@ public class Percolation {
         }
 
         int index = xyTo1d(row, col);
+        if (row == side -1){
+            if (UF.connected(side * side, index)){
+                UF.union(side*side + 1, index);
+            }
+        }
 
         if (UF.connected(index, side*side)){
             return true;
