@@ -49,7 +49,7 @@ public class TestComplexOomage {
             int x = 1;
             for (int j = 0; j < N; j += 1) {
                 params.add(x * 2);
-                x = x*2;
+                x = x * 2;
             }
             deadlyList.add(new ComplexOomage(params));
         }
