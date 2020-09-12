@@ -42,9 +42,9 @@ public class TestComplexOomage {
         List<Oomage> deadlyList = new ArrayList<>();
 
         // Your code here.
-        int M = 100;
+        int M = 10000;
         for (int i = 0; i < M; i++){
-            int N = StdRandom.uniform(4, 8);
+            int N = StdRandom.uniform(1, 8);
             ArrayList<Integer> params = new ArrayList<>(N);
             int x = 1;
             for (int j = 0; j < N; j += 1) {
