@@ -15,17 +15,16 @@ public class OomageTestUtility {
          * Oomages and no bucket has more than N / 2.5 Oomages.
          */
         int[] intArr = new int[M];
+        int N = oomages.size();
 
-        double low_num = oomages.size() / 50;
-        double high_num = oomages.size() / 2.5;
 
-        for (Oomage o:oomages){
+        for (Oomage o : oomages){
             int bucketNum = (o.hashCode() & 0x7FFFFFFF) % M;
             intArr[bucketNum] += 1;
         }
 
         for(int i : intArr){
-            if (i < low_num || i > high_num)
+            if (i < (N / 50) || i > (N / 2.5))
                 return false;
         }
 
