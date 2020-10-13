@@ -107,8 +107,8 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
         }
 
         items.add(new PriorityNode(item, priority));
-        swim(size() -1);
         IndexMap.put(item, size() -1);
+        swim(size() -1);
     }
 
     @Override
@@ -117,7 +117,7 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
             throw new NoSuchElementException();
         }
 
-        T p = getSmallest();
+        T p = items.get(0).item;
         swap(0, size() - 1);
         items.remove(size() -1);
         IndexMap.remove(p);
@@ -137,8 +137,9 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
         items.get(index).setPriority(priority);
         if (OldPriority < priority){
             sink(index);
+        }else{
+            swim(index);
         }
-        swim(index);
     }
 
 }

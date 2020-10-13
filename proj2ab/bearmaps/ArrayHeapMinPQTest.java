@@ -1,7 +1,7 @@
 package bearmaps;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import edu.princeton.cs.algs4.Stopwatch;
 
 public class ArrayHeapMinPQTest {
 
@@ -90,52 +90,54 @@ public class ArrayHeapMinPQTest {
 
     @Test
     public void testTime(){
-        ArrayHeapMinPQ<Integer> temp = new ArrayHeapMinPQ<>();
-        NaiveMinPQ<Integer> temp2 = new NaiveMinPQ<>();
-
-        long start = System.currentTimeMillis();
-        for (int i = 100000; i > 0; i--) {
-            temp.add(i, i);
+        Stopwatch sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            APQ.add(i, i);
         }
-        for (int i = 1; i <= 100000; i++) {
-            temp.removeSmallest();
+        for (int j = 100000; j > 0; j--){
+            APQ.removeSmallest();
         }
-        long end = System.currentTimeMillis();
-        System.out.println("Add and Remove: Total time elapsed: " + (end-start) / 1000.0 + " seconds.");
+        System.out.println("APQ Add and Remove: Total time elapsed: " + sw.elapsedTime() + " Seconds");
 
-//        long start1 = System.currentTimeMillis();
-//        for (int i = 100000; i > 0; i--) {
-//            temp2.add(i, i);
-//        }
-//        for (int i = 1; i <= 100000; i++) {
-//            temp2.removeSmallest();
-//        }
-//        long end1 = System.currentTimeMillis();
-//        System.out.println("Add and Remove: Total time elapsed: " + (end1-start1) / 1000.0 + " seconds.");
+        sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            NPQ.add(i, i);
+        }
+        for (int j = 100000; j > 0; j--){
+            NPQ.removeSmallest();
+        }
+        System.out.println("NPQ Add and Remove: Total time elapsed: " + sw.elapsedTime() + " Seconds");
 
 
+        for (int i = 0; i < 100000; i++){
+            APQ.add(i, i);
+            NPQ.add(i, i);
+        }
 
-//        for (int i = 0; i < 10000000; i++){
-//            APQ.add(i,0.1*i);
-//        }
-//        long start = System.currentTimeMillis();
-//        for (int i = 0; i < 10000000; i++){
-//            APQ.changePriority(11,0.1);
-//        }
-//        long end = System.currentTimeMillis();
-//        System.out.println("APQ Total time elapsed: " + (end-start) / 1000.0 + "Seconds");
-//
-//        for (int i = 0; i < 10000000; i++){
-//            NPQ.add(i,0.1*i);
-//        }
-//        long start1 = System.currentTimeMillis();
-//        for (int i = 0; i < 10000000; i++){
-//            NPQ.changePriority(11,0.1);
-//        }
-//        long end1 = System.currentTimeMillis();
-//        System.out.println("NPQ Total time elapsed: " + (end1-start1) / 1000.0 + "Seconds");
+        sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            APQ.changePriority(i, 100000 - i);
+        }
+        System.out.println("APQ changePriority: Total time elapsed: " + sw.elapsedTime() + " Seconds");
 
+        sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            NPQ.changePriority(i, 100000 - i);
+        }
+        System.out.println("NPQ changePriority: Total time elapsed: " + sw.elapsedTime() + " Seconds");
 
+        sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            APQ.contains(i);
+        }
+        System.out.println("APQ contains: Total time elapsed: " + sw.elapsedTime() + " Seconds");
+
+        sw = new Stopwatch();
+        for (int i = 0; i < 100000; i++){
+            NPQ.contains(i);
+        }
+        System.out.println("NPQ contains: Total time elapsed: " + sw.elapsedTime() + " Seconds");
     }
+
 
 }
