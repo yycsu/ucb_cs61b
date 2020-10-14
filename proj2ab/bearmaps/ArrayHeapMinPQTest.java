@@ -21,6 +21,8 @@ public class ArrayHeapMinPQTest {
         APQ.changePriority(66,0.1);
         APQ.removeSmallest();
         assertTrue(APQ.contains(22));
+        assertFalse(APQ.contains(11));
+
     }
 
     @Test
@@ -60,7 +62,7 @@ public class ArrayHeapMinPQTest {
         APQ.add(33, 1.5);
         APQ.add(44,0.3);
         APQ.changePriority(33,0.1);
-        assertEquals((int)APQ.getSmallest(), 33);
+        assertTrue(APQ.getSmallest() == 33);
     }
 
     @Test
@@ -72,6 +74,7 @@ public class ArrayHeapMinPQTest {
         APQ.add(55,4.3);
         APQ.add(66,0.03);
         assertEquals((int)APQ.getSmallest(), 66);
+        assertTrue(APQ.size() == 6);
     }
 
     @Test
@@ -85,7 +88,7 @@ public class ArrayHeapMinPQTest {
         APQ.removeSmallest();
         APQ.removeSmallest();
         APQ.changePriority(66,0.1);
-        assertEquals((int)APQ.getSmallest(), 66);
+        assertTrue(APQ.getSmallest() == 66);
     }
 
     @Test
@@ -138,6 +141,4 @@ public class ArrayHeapMinPQTest {
         }
         System.out.println("NPQ contains: Total time elapsed: " + sw.elapsedTime() + " Seconds");
     }
-
-
 }

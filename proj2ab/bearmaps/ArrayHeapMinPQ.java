@@ -1,5 +1,4 @@
 package bearmaps;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -9,7 +8,12 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
     private ArrayList<PriorityNode> items;
     private HashMap<T, Integer> IndexMap;
 
-    class PriorityNode{
+    public ArrayHeapMinPQ(){
+        items = new ArrayList<PriorityNode>();
+        IndexMap = new HashMap<>();
+    }
+
+    class PriorityNode {
         private T item;
         private double priority;
 
@@ -18,19 +22,9 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
             this.priority = priority;
         }
 
-        private void setPriority(double priority) {
+        private void setPriority(double priority){
             this.priority = priority;
         }
-    }
-
-    public ArrayHeapMinPQ(){
-        items = new ArrayList<>();
-        IndexMap = new HashMap<>();
-    }
-
-    @Override
-    public int size(){
-        return items.size();
     }
 
     public boolean isEmpty(){
@@ -38,7 +32,7 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
     }
 
     @Override
-    public boolean contains(T item) {
+    public boolean contains(T item){
         if (isEmpty()){
             return false;
         }
@@ -46,32 +40,37 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
     }
 
     @Override
-    public T getSmallest() {
+    public T getSmallest(){
         if (isEmpty()){
             throw new NoSuchElementException();
         }
         return items.get(0).item;
     }
 
+    @Override
+    public int size(){
+        return items.size();
+    }
+
     private int parent(int i){
-        return (i -1)/2;
+        return (i-1) / 2;
     }
 
     private int leftChild(int i){
-        return 2 * i +1;
+        return 2 * i + 1;
     }
 
     private int rightChild(int i){
         return 2 * i + 2;
     }
 
-    private void swap(int i , int j){
+    private void swap(int i, int j){
         PriorityNode temp = items.get(i);
         items.set(i, items.get(j));
         items.set(j, temp);
 
         IndexMap.put(items.get(i).item, i);
-        IndexMap.put(items.get(i).item, j);
+        IndexMap.put(items.get(j).item, j);
     }
 
     private boolean smaller(int i, int j){
@@ -87,70 +86,63 @@ class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>{
 
     private void sink(int i){
         int smallest = i;
-        if (leftChild(i) < size() -1 && smaller(leftChild(i), i)){
+
+        if (leftChild(i) < size() - 1 && smaller(leftChild(i), i)){
             smallest = leftChild(i);
         }
-        if (rightChild(i) < size() -1 && smaller(rightChild(i), leftChild(i))){
+        if (rightChild(i) < size() - 1 && smaller(rightChild(i), leftChild(i))){
             smallest = rightChild(i);
         }
 
-        if(smallest != i){
+        if (smallest != i){
             swap(i, smallest);
             sink(smallest);
         }
     }
 
     @Override
-    public void add(T item, double priority) {
+    public void add(T item, double priority){
+
         if (contains(item)){
             throw new IllegalArgumentException();
         }
 
         items.add(new PriorityNode(item, priority));
         IndexMap.put(item, size() -1);
-        swim(size() -1);
+        swim(size() - 1);
     }
 
     @Override
-    public T removeSmallest() {
+    public T removeSmallest(){
         if (isEmpty()){
             throw new NoSuchElementException();
         }
 
-        T p = items.get(0).item;
+        T smallest = items.get(0).item;
         swap(0, size() - 1);
-        items.remove(size() -1);
-        IndexMap.remove(p);
+        items.remove(size() - 1);
+        IndexMap.remove(smallest);
         sink(0);
-        return p;
+        return smallest;
     }
 
     @Override
-    public void changePriority(T item, double priority) {
-
+    public void changePriority(T item, double priority){
         if (isEmpty() || !contains(item)){
             throw new NoSuchElementException();
         }
 
         int index = IndexMap.get(item);
-        double OldPriority = items.get(index).priority;
+        double oldPriority = items.get(index).priority;
         items.get(index).setPriority(priority);
-        if (OldPriority < priority){
+
+        if (oldPriority < priority){
             sink(index);
-        }else{
-            swim(index);
         }
+        swim(index);
     }
 
 }
-
-
-
-
-
-
-
-
 
 
 
