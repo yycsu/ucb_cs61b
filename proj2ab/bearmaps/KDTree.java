@@ -30,7 +30,6 @@ public class KDTree implements PointSet{
         for (Point p : points){
             root = add(p, root, horizontal);
         }
-
     }
 
     private Node add(Point p, Node n, boolean orientation){
@@ -58,11 +57,22 @@ public class KDTree implements PointSet{
     }
 
     @Override
-    public Point nearest(double x, double y) {
-        return null;
+    public Point nearest(double x, double y){
+        Point p = new Point(x, y);
+        return nearest(root, p, root.p);
     }
 
-    public static void main(String[] args) {
+    private Point nearest(Node n, Point goal , Point best) {
+        if (n == null)
+            return best;
+        if (Point.distance(n.p, goal) < Point.distance(best, goal))
+            best = n.p;
+        best = nearest(n.LeftChild, goal, best);
+        best = nearest(n.RightChild, goal, best);
+        return best;
+    }
+
+    public static void buildLectureTree(){
         Point p1 = new Point(2, 3);
         Point p2 = new Point(4, 2);
         Point p3 = new Point(4, 2);
@@ -72,6 +82,18 @@ public class KDTree implements PointSet{
         Point p7 = new Point(4, 4);
 
         KDTree kd = new KDTree(List.of(p1, p2, p3, p4, p5, p6, p7));
+
+    }
+
+    public static void buildTreewithDoubles(){
+        Point p1 = new Point(2, 3);
+        Point p2 = new Point(2, 3);
+
+        KDTree kd = new KDTree(List.of(p1, p2));
+    }
+
+    public static void main(String[] args) {
+        buildTreewithDoubles();
         System.out.println("OK!!");
     }
 }
