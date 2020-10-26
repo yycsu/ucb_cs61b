@@ -57,13 +57,34 @@ public class KDTree implements PointSet{
     }
 
     private Point nearest(Node n, Point goal , Point best) {
+        Node goodSide, badSide;
         if (n == null)
             return best;
         if (Point.distance(n.p, goal) <= Point.distance(best, goal))
             best = n.p;
-        best = nearest(n.LeftChild, goal, best);
-        best = nearest(n.RightChild, goal, best);
+        if (better(n, goal)){
+            goodSide = n.RightChild;
+            badSide = n.LeftChild;
+        }
+        else{
+            goodSide = n.LeftChild;
+            badSide = n.RightChild;
+        }
+
+        best = nearest(goodSide, goal, best);
+        if (badSide != null){
+            best = nearest(badSide, goal, best);
+        }
         return best;
+    }
+
+    public boolean better(Node n, Point goal){
+        if (n.orientation == horizontal){
+            return goal.getX() > n.p.getX();
+        }
+        else {
+            return goal.getY() > n.p.getY();
+        }
     }
 
     public static void buildLectureTree(){

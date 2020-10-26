@@ -1,5 +1,6 @@
 package bearmaps;
 
+import edu.princeton.cs.algs4.Stopwatch;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -40,6 +41,27 @@ public class KDTreeTest {
         }
     }
 
+    public void testTimeNPointsAndQQueries(int N, int Q){
+
+        List<Point> testPoints = getArray(N);
+        NaivePointSet NP = new NaivePointSet(testPoints);
+        KDTree kd = new KDTree(testPoints);
+        List<Point> queryPoints = getArray(Q);
+
+        Stopwatch sw = new Stopwatch();
+        for (Point p : queryPoints){
+            Point expected = NP.nearest(p.getX(), p.getY());
+        }
+        System.out.println("NP Total time elapsed: " + sw.elapsedTime() +  " seconds.");
+
+        sw = new Stopwatch();
+        for (Point p : queryPoints){
+            Point expected = kd.nearest(p.getX(), p.getY());
+        }
+        System.out.println("kd Total time elapsed: " + sw.elapsedTime() +  " seconds.");
+
+    }
+
     @Test
     public void testWith1000PointsAnd200Queries(){
         int pointCount = 1000;
@@ -52,6 +74,13 @@ public class KDTreeTest {
         int pointCount = 10000;
         int queryCount = 2000;
         testWithNPointsAndQQueries(pointCount, queryCount);
+    }
+
+    @Test
+    public void testWith100000PointsAnd10000Queries(){
+        int pointCount = 100000;
+        int queryCount = 10000;
+        testTimeNPointsAndQQueries(pointCount, queryCount);
     }
 
 }
