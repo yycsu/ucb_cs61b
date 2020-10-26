@@ -3,6 +3,7 @@ package bearmaps;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
@@ -16,8 +17,8 @@ public class KDTreeTest {
         return new Point(x, y);
     }
 
-    public ArrayList<Point> getArray(int N){
-        ArrayList<Point> p = new ArrayList<>();
+    public List<Point> getArray(int N){
+        List<Point> p = new ArrayList<>();
         for (int i = 0; i < N; i++){
             p.add(getRamdom());
         }
@@ -27,10 +28,10 @@ public class KDTreeTest {
 
     public void testWithNPointsAndQQueries(int N, int Q){
 
-        ArrayList<Point> testPoints = getArray(N);
+        List<Point> testPoints = getArray(N);
         NaivePointSet NP = new NaivePointSet(testPoints);
         KDTree kd = new KDTree(testPoints);
-        ArrayList<Point> queryPoints = getArray(Q);
+        List<Point> queryPoints = getArray(Q);
 
         for (Point p : queryPoints){
             Point expected = NP.nearest(p.getX(), p.getY());
@@ -41,8 +42,8 @@ public class KDTreeTest {
 
     @Test
     public void testWith1000PointsAnd200Queries(){
-        int pointCount = 5;
-        int queryCount = 2;
+        int pointCount = 1000;
+        int queryCount = 200;
         testWithNPointsAndQQueries(pointCount, queryCount);
     }
 

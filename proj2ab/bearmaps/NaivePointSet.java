@@ -19,10 +19,11 @@ public class NaivePointSet implements PointSet{
     @Override
     public Point nearest(double x, double y){
         Point goal = new Point(x, y);
-        double current_distance = goal.distance(goal, MyPoints.get(0));
+        double current_distance = Point.distance(goal, MyPoints.get(0));
         for (Point i: MyPoints){
-            if (i.distance(i, goal) < current_distance){
+            if (Point.distance(i, goal) <= current_distance){
                 best = i;
+                current_distance = Point.distance(i, goal);
             }
         }
         return best;

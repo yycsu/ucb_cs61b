@@ -1,11 +1,5 @@
 package bearmaps;
-
-import org.junit.Test;
-
-import java.lang.ref.Reference;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class KDTree implements PointSet{
     private static  final boolean horizontal = false;
@@ -65,7 +59,7 @@ public class KDTree implements PointSet{
     private Point nearest(Node n, Point goal , Point best) {
         if (n == null)
             return best;
-        if (Point.distance(n.p, goal) < Point.distance(best, goal))
+        if (Point.distance(n.p, goal) <= Point.distance(best, goal))
             best = n.p;
         best = nearest(n.LeftChild, goal, best);
         best = nearest(n.RightChild, goal, best);
