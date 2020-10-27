@@ -73,34 +73,23 @@ public class KDTree implements PointSet{
 
         best = nearest(goodSide, goal, best);
 
-        Point badbest = bestPoint(badSide, best, goal);
-
-        if (badbest.getX() != best.getX() || badbest.getY() !=  best.getY()){
+        if (worthToLookBack(n, goal, best)){
             best = nearest(badSide, goal, best);
         }
         return best;
     }
 
-    public Point bestPoint(Node badSide, Point best,Point goal){
-
-        if (badSide.LeftChild == null && badSide.RightChild == null)
-            return best;
-
-        if (badSide.LeftChild != null){
-            if (Point.distance(badSide.LeftChild.p, goal) < Point.distance(best, goal)){
-                best = badSide.LeftChild.p;
-            }
-            best = bestPoint(badSide.LeftChild, best, goal);
+    public boolean worthToLookBack(Node n, Point goal, Point best){
+        double distance;
+        double current_distance = Point.distance(best, goal);
+        if (n.orientation == horizontal){
+            distance = Point.distance(new Point(n.p.getX(), goal.getY()), goal);
         }
-        if (badSide.RightChild != null){
-            if (Point.distance(badSide.RightChild.p, goal) < Point.distance(best, goal)){
-                best = badSide.RightChild.p;
-            }
-            best = bestPoint(badSide.RightChild, best, goal);
-        }
-
-        return best;
+        else
+            distance = Point.distance(new Point(goal.getX(), n.p.getY()), goal);
+        return distance < current_distance;
     }
+
 
     public int better(Node n, Point goal){
         if (n.orientation == horizontal){
