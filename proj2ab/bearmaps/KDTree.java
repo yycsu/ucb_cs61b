@@ -62,7 +62,7 @@ public class KDTree implements PointSet{
             return best;
         if (Point.distance(n.p, goal) <= Point.distance(best, goal))
             best = n.p;
-        if (better(n, goal)){
+        if (better(n, goal) > 0){
             goodSide = n.RightChild;
             badSide = n.LeftChild;
         }
@@ -72,18 +72,42 @@ public class KDTree implements PointSet{
         }
 
         best = nearest(goodSide, goal, best);
-        if (badSide != null){
+
+        Point badbest = bestPoint(badSide, best, goal);
+
+        if (badbest.getX() != best.getX() || badbest.getY() !=  best.getY()){
             best = nearest(badSide, goal, best);
         }
         return best;
     }
 
-    public boolean better(Node n, Point goal){
+    public Point bestPoint(Node badSide, Point best,Point goal){
+
+        if (badSide.LeftChild == null && badSide.RightChild == null)
+            return best;
+
+        if (badSide.LeftChild != null){
+            if (Point.distance(badSide.LeftChild.p, goal) < Point.distance(best, goal)){
+                best = badSide.LeftChild.p;
+            }
+            best = bestPoint(badSide.LeftChild, best, goal);
+        }
+        if (badSide.RightChild != null){
+            if (Point.distance(badSide.RightChild.p, goal) < Point.distance(best, goal)){
+                best = badSide.RightChild.p;
+            }
+            best = bestPoint(badSide.RightChild, best, goal);
+        }
+
+        return best;
+    }
+
+    public int better(Node n, Point goal){
         if (n.orientation == horizontal){
-            return goal.getX() > n.p.getX();
+            return Double.compare(goal.getX() , n.p.getX());
         }
         else {
-            return goal.getY() > n.p.getY();
+            return Double.compare(goal.getY() , n.p.getY());
         }
     }
 
